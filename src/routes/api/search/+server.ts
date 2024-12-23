@@ -1,9 +1,6 @@
-// import { ChatbotCompletion } from '$lib';
-
 export async function POST(params: { request: Request }) {
 	const { query } = await params.request.json();
 
-  console.log("BOBOBOIadfg;oidjfsgioj");
 	// const completion_manager = new ChatbotCompletion(import.meta.env.VITE_OPENAI_API_KEY!, {
 	// 	openai_model: import.meta.env.VITE_OPENAI_MODEL_NAME!,
 	// 	verbose: true,

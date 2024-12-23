@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 	import whitelist from '../../config/teacher_email.json';
+  import {app} from '$lib/firebase'
 	const auth = getAuth();
 	const provider = new GoogleAuthProvider();
+  console.log(app);
 	signInWithPopup(auth, provider)
 		.then((result) => {
 			// TODO: https://github.com/jamezmca/sveltekit-auth/blob/main/src/routes/privatedashboard/%2Bpage.svelte
