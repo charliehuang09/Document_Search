@@ -36,6 +36,7 @@
 	"type": "module",
 	"dependencies": {
 		"firebase": "^11.0.2",
+		"firebase-admin": "^13.0.2",
 		"firebaseui": "^6.1.0",
 		"typescript-language-server": "^4.3.3"
 	}
