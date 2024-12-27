@@ -29,4 +29,3 @@ if (!getApps().length) {
 }
 
 export const auth = getAuth(firebaseApp)
-

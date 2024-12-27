@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 	import whitelist from '../../config/teacher_email.json';
-  import { auth } from '$lib/firebase'
+	import { auth } from '$lib/firebase';
 	const provider = new GoogleAuthProvider();
 	signInWithPopup(auth, provider)
 		.then((result) => {
@@ -25,3 +25,6 @@
 			console.log(error);
 		});
 </script>
+
+
+TEACHER PAGE
