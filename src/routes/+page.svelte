@@ -1,8 +1,12 @@
 <script lang="ts">
 	import '../output.css';
+	import { PaperAirplane } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let query = '';
 	async function search() {
+		console.log('dadsfa');
+		query = '';
 		console.log(query);
 		const response = await fetch('api/search', {
 			method: 'POST',
@@ -13,6 +17,7 @@
 				'content-type': 'application/json'
 			}
 		});
+		console.log(response);
 	}
 </script>
 
@@ -25,8 +30,8 @@
 		placeholder="Enter your message..."
 		class="m-auto outline-none active:border-none rounded-md p-2 flex-1"
 	/>
-	<button on:click={search}> </button>
-
-	<button on:click={search}> </button>
+	<button on:click={search}>
+    submit
+	</button>
 </form>
 
