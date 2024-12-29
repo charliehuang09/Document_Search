@@ -2,14 +2,16 @@
 	import '../output.css';
 
 	type result = {
-		index: number;
-	};
+		index: number,
+    str: string,
+  };
 
 	let query = '';
 	let results: result[] = [];
 	async function search() {
+    const chunkSize = 5;
 		console.log('searching...');
-    results = []
+		results = [];
 		let book = '';
 		await fetch('/book.txt')
 			.then((response) => {
@@ -26,6 +28,15 @@
 				book = 'Error loading file';
 			});
 		const indexes = [...book.matchAll(new RegExp(query, 'gi'))].map((a) => a.index);
+		for (let index of indexes) {
+      results.push(
+        {
+          index: index,
+          str: book.substr(index - chunkSize, query.length + chunkSize * 2), 
+        }
+      );
+		}
+    console.log(results)
 	}
 </script>
 
