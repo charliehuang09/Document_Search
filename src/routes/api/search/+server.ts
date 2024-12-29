@@ -1,23 +1,12 @@
-export async function POST(params: { request: Request }) {
-	const { query } = await params.request.json();
+import { json } from '@sveltejs/kit';
+import * as database from '$lib/server/database.js';
 
-	// const completion_manager = new ChatbotCompletion(import.meta.env.VITE_OPENAI_API_KEY!, {
-	// 	openai_model: import.meta.env.VITE_OPENAI_MODEL_NAME!,
-	// 	verbose: true,
-	// 	do_history: true,
-	// 	generate_data: false,
-	// 	use_summarybot: true
-	// });
-	// await completion_manager.setup();
-	//
-	// const output = await completion_manager.query(chatHistory, input);
-
-	return new Response(JSON.stringify(query), {
-		headers: {
-			'Content-Type': 'text/plain'
-		}
-	});
+export function GET() {
+  const data = {
+    message: "Hello, World!",
+    timestamp: new Date().toISOString(),
+  };
+  return new Response(JSON.stringify(data), {
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
-// Tomcat
-// Servlet 4.0
-// Interceptor

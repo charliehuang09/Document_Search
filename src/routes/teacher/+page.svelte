@@ -18,8 +18,8 @@
 					verified = true;
 				}
 			}
-			console.log(verified);
-			console.log(token);
+			// console.log(verified);
+			// console.log(token);
 		})
 		.catch((error) => {
 			console.log(error);

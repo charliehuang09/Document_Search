@@ -1,23 +1,31 @@
 <script lang="ts">
 	import '../output.css';
-	import { PaperAirplane } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let query = '';
+	type result = {
+		index: number;
+	};
+
+	let query = '';
+	let results: result[] = [];
 	async function search() {
-		console.log('dadsfa');
-		query = '';
-		console.log(query);
-		const response = await fetch('api/search', {
-			method: 'POST',
-			body: JSON.stringify({
-				query: 'query'
-			}),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
-		console.log(response);
+		console.log('searching...');
+    results = []
+		let book = '';
+		await fetch('/book.txt')
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`Failed to fetch file: ${response.status}`);
+				}
+				return response.text();
+			})
+			.then((data) => {
+				book = data;
+			})
+			.catch((error) => {
+				console.error(error);
+				book = 'Error loading file';
+			});
+		const indexes = [...book.matchAll(new RegExp(query, 'gi'))].map((a) => a.index);
 	}
 </script>
 
@@ -30,8 +38,5 @@
 		placeholder="Enter your message..."
 		class="m-auto outline-none active:border-none rounded-md p-2 flex-1"
 	/>
-	<button on:click={search}>
-    submit
-	</button>
+	<button on:click={search}> submit </button>
 </form>
-
