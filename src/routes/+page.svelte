@@ -1,15 +1,17 @@
 <script lang="ts">
 	import '../output.css';
-
+	import Result from '$lib/Result.svelte';
 	type result = {
-		index: number,
-    str: string,
-  };
+		index: number;
+		str: string;
+	};
 
 	let query = '';
 	let results: result[] = [];
+	let items = [1, 2, 3, 4, 5];
 	async function search() {
-    const chunkSize = 5;
+		let chunkSize = 5;
+		items = [];
 		console.log('searching...');
 		results = [];
 		let book = '';
@@ -29,14 +31,22 @@
 			});
 		const indexes = [...book.matchAll(new RegExp(query, 'gi'))].map((a) => a.index);
 		for (let index of indexes) {
-      results.push(
-        {
-          index: index,
-          str: book.substr(index - chunkSize, query.length + chunkSize * 2), 
-        }
-      );
+			if (index - chunkSize < 0) {
+				chunkSize = index;
+			}
+			if (index + chunkSize >= book.length) {
+				chunkSize = book.length - 1 - index;
+			}
+			results = [
+				...results,
+				{
+					index: index,
+					str: book.substr(index - chunkSize, query.length + chunkSize * 2)
+				}
+			];
 		}
-    console.log(results)
+		console.log(results);
+		console.log(results.length);
 	}
 </script>
 
@@ -46,8 +56,12 @@
 	<input
 		bind:value={query}
 		on:submit={search}
-		placeholder="Enter your message..."
+		placeholder="Enter your quote..."
 		class="m-auto outline-none active:border-none rounded-md p-2 flex-1"
 	/>
 	<button on:click={search}> submit </button>
 </form>
+
+{#each results as result}
+	<Result content={result.str}/>
+{/each}
