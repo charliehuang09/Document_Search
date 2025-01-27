@@ -8,10 +8,8 @@
 
 	let query = '';
 	let results: result[] = [];
-	let items = [1, 2, 3, 4, 5];
 	async function search() {
-		let chunkSize = 5;
-		items = [];
+		let chunkSize = 100;
 		console.log('searching...');
 		results = [];
 		let book = '';
