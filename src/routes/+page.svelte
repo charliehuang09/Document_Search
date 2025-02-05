@@ -9,42 +9,11 @@
 	let query = '';
 	let results: result[] = [];
 	async function search() {
-		let chunkSize = 100;
-		console.log('searching...');
-		results = [];
-		let book = '';
-		await fetch('/book.txt')
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error(`Failed to fetch file: ${response.status}`);
-				}
-				return response.text();
-			})
-			.then((data) => {
-				book = data;
-			})
-			.catch((error) => {
-				console.error(error);
-				book = 'Error loading file';
-			});
-		const indexes = [...book.matchAll(new RegExp(query, 'gi'))].map((a) => a.index);
-		for (let index of indexes) {
-			if (index - chunkSize < 0) {
-				chunkSize = index;
-			}
-			if (index + chunkSize >= book.length) {
-				chunkSize = book.length - 1 - index;
-			}
-			results = [
-				...results,
-				{
-					index: index,
-					str: book.substr(index - chunkSize, query.length + chunkSize * 2)
-				}
-			];
-		}
-		console.log(results);
-		console.log(results.length);
+    collection: String = "TheHateYouGive"
+    limit = 5
+    const response = await fetch(`/api/search?query=${query}&collection=${collection}&limit=${limit}`);
+    const data = await response.json();
+    console.log("Output" + data.results)
 	}
 </script>
 

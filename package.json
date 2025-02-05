@@ -36,6 +36,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@langchain/core": "^0.3.42",
+		"@langchain/openai": "^0.4.4",
+		"@qdrant/qdrant-js": "^1.13.0",
 		"@steeze-ui/heroicons": "^2.4.2",
 		"@steeze-ui/svelte-icon": "^1.6.2",
 		"firebase": "^11.0.2",
