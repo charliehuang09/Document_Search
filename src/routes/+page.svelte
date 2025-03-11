@@ -1,16 +1,15 @@
 <script lang="ts">
     import '../app.css';
 
-	let query = '';
-	let results: result[] = [];
-	async function search() {
-    const collection: String = "TheHateYouGive"
-    const limit: int = 5
-    const response = await fetch(`/api/search?query=${query}&collection=${collection}&limit=${limit}`);
-    const data = await response.json();
-    console.log("Output" + data.results)
-	}
-//
+    let query = '';
+    let results: result[] = [];
+    async function search() {
+      const collection: String = "TheHateYouGive"
+      const limit: int = 5
+      const response = await fetch(`/api/search?query=${query}&collection=${collection}&limit=${limit}`);
+      const data = await response.json();
+      console.log("Output" + data.results)
+    }
 //     let query = '';
 //     let results: result[] = [];
 //     async function search() {
