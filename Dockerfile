@@ -4,11 +4,17 @@ FROM node:18
 
 # Set the working directory inside the container
 
+USER node
+
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the container
 
-COPY package*.json ./
+COPY . .
+
+USER root
+RUN chown -R node:node .
+USER node
 
 # Install project dependencies
 
@@ -16,7 +22,6 @@ RUN npm install
 
 # Copy the rest of the application code to the container
 
-COPY . .
 
 # Build your Vite React project
 
