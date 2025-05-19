@@ -2,26 +2,36 @@
 import '../app.css';
 import type { Result } from '$lib/index'
 let query= $state("");
+let searchType = $state("");
 
 async function search(){
-  const type = "word"
-  if (type === "vector"){
+  console.log("Search")
+  if (searchType === "vector"){
+    console.log("Vector Search")
     const collection: String = "TheHateYouGive"
     const limit: int = 5
     const response = await fetch(`/api/search/vector?query=${query}&collection=${collection}&limit=${limit}`);
     const data : Result[] = await response.json() as Result[];
   }
-  if (type === "word"){
+  if (searchType === "word"){
+    console.log("Word Search")
     const collection: String = "TheHateYouGive"
     const chunk_size: int = 100
     const limit : int = 5
     const response = await fetch(`/api/search/word?query=${query}&chunk_size=${chunk_size}&limit=${limit}`);
-    const data : Result[] = await response.json() as Result[];
+    console.log(await response.json());
+    console.log("Done")
   }
 }
 </script>
 
 <main>
+    <div>
+        <select bind:value={searchType} class="search-type-dropdown">
+        <option value="vector">Vector Search</option>
+        <option value="word">Word Search</option>
+      </select>
+    </div>
     <div class="search-container">
         <input bind:value={query} type="text" placeholder="Search..." class="search-bar" />
         <button onclick={search} class="submit-button">Search</button>
