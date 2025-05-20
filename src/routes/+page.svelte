@@ -1,8 +1,9 @@
 <script lang="ts">
 import '../app.css';
-import type { Result } from '$lib/index'
 let query= $state("");
 let searchType = $state("");
+let result = $state([]);
+const chunk_size: int = 10
 
 async function search(){
   console.log("Search")
@@ -11,16 +12,14 @@ async function search(){
     const collection: String = "TheHateYouGive"
     const limit: int = 5
     const response = await fetch(`/api/search/vector?query=${query}&collection=${collection}&limit=${limit}`);
-    const data : Result[] = await response.json() as Result[];
+    const data = await response.json();
   }
   if (searchType === "word"){
     console.log("Word Search")
     const collection: String = "TheHateYouGive"
-    const chunk_size: int = 100
     const limit : int = 5
     const response = await fetch(`/api/search/word?query=${query}&chunk_size=${chunk_size}&limit=${limit}`);
-    console.log(await response.json());
-    console.log("Done")
+    result = await response.json();
   }
 }
 </script>
@@ -36,6 +35,13 @@ async function search(){
         <input bind:value={query} type="text" placeholder="Search..." class="search-bar" />
         <button onclick={search} class="submit-button">Search</button>
     </div>
+  <div class="mt-10 w-full overflow-y-auto">
+    <p>Found {result.length} results</p>
+		{#each result as { data, idx}}
+        <p class="quote">"{data}"</p>
+        <p class="page-number">Page: {idx}</p>
+		{/each}
+	</div>
 </main>
 
 <style>

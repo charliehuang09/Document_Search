@@ -79,9 +79,9 @@ export async function GET(params: { url: URL }) {
     const limitedMatches = limit > 0 ? matches.slice(0, limit) : matches;
     
     if (chunk_size > 0) {
-        const results : Result = limitedMatches.map(matchIndex => {
+        const results = limitedMatches.map(matchIndex => {
             const start = Math.max(0, matchIndex - chunk_size);
-            const end = Math.min(book.text.length, matchIndex + query.length + chunk_size);
+            const end = Math.min(book.text.length, matchIndex + query.length + Number(chunk_size));
             return {
                 idx: getPageNum(matchIndex),
                 data: book.text.slice(start, end)
@@ -89,7 +89,6 @@ export async function GET(params: { url: URL }) {
         });
         return json(results);
     }
-    console.log(results);
 
     return json(limitedMatches);
 }
