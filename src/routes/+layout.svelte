@@ -8,10 +8,7 @@
         <div class="logo">
             <h1>DocSearch</h1>
         </div>
-        <div class="nav-links">
-            <a href="/" class="nav-item">Home</a>
-            <a href="/teacher" class="nav-item">Teacher Portal</a>
-        </div>
+
     </nav>
 </header>
 
