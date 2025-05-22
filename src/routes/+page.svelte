@@ -26,34 +26,25 @@ async function search(){
 </script>
 <main>
   <header>
-    <div class="nav-link-container">
-      <a href="/" class="nav-link home-link">Home</a>
-    </div>
-
     <h1>Quote Searcher</h1>
-
-    <div class="nav-link-container right-nav">
-      <a href="/teacher-portal" class="nav-link teacher-portal-link">Teacher Portal</a>
-    </div>
   </header>
+
+        <select bind:value={searchType} class="search-type-dropdown">
+        <option value="vector">Vector Search</option>
+        <option value="word">Word Search</option>
+      </select>
 
   <section class="search-and-results-section">
     <div class="search-container">
-      <input
-        type="text"
-        placeholder="Can search for quotes in a PDF here"
-        class="search-bar"
-        bind:value={query}
-        on:keydown={(event) => { if (event.key === 'Enter') search(); }}
-      />
-      <button on:click={search} class="submit-button">Sejghfhgfdgarch</button>
+      <input bind:value={query} type="text" placeholder="Search..." class="search-bar" />
+      <button onclick={search} class="submit-button">Search</button>
     </div>
 
   <div class="results-box">
     {#if results.length}
       {#each results as result}
-          <P class = "quote">"{result.data}"</P>
-          <P class="page-number">Page; {result.idx}</P>
+          <p class = "quote">"{result.data}"</p>
+          <p class="page-number">Page; {result.idx}</p>
       {/each}
     {:else}
       <p>No results found{#if query} for &quot;{query}&quot;{/if}.</p>
@@ -78,9 +69,7 @@ async function search(){
   body {
     margin: 0;
     font-family: sans-serif;
-    background-color: var(--primary-bg-color);
-  }
-
+    background-color: var(--primary-bg-color); }
   /* Main container for the entire page content */
   main {
     display: flex;
@@ -230,81 +219,4 @@ async function search(){
     font-size: 0.8em;
     color: #666;
   }
-
-  /* Conditional centering for the initial "Results will show up here..." message
-  .results-box:has(p:only-child) {
-    justify-content: center;
-    align-items: center;
-  } */
 </style>
-
-
-<!-- <script lang="ts">
-    import '../app.css';
-
-	let query = '';
-	let results: result[] = [];
-	async function search() {
-    const collection: String = "TheHateYouGive"
-    const limit: int = 5
-    const response = await fetch(`/api/search?query=${query}&collection=${collection}&limit=${limit}`);
-    const data = await response.json();
-    console.log("Output" + data.results)
-	}
-
->>>>>>> Stashed changes
-</script>
-
-<main>
-    <div>
-        <select bind:value={searchType} class="search-type-dropdown">
-        <option value="vector">Vector Search</option>
-        <option value="word">Word Search</option>
-      </select>
-    </div>
-    <div class="search-container">
-        <input bind:value={query} type="text" placeholder="Search..." class="search-bar" />
-        <button onclick={search} class="submit-button">Search</button>
-    </div>
-  <div class="mt-10 w-full overflow-y-auto">
-    <p>Found {result.length} results</p>
-		{#each result as { data, idx}}
-        <p class="quote">"{data}"</p>
-        <p class="page-number">Page: {idx}</p>
-		{/each}
-	</div>
-</main>
-
-<style>
-    .search-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem;
-        gap: 0.5rem;
-    }
-
-
-    .search-bar {
-        width: 50%;
-        padding: 0.5rem 1rem;
-        border: 1px solid #ccc;
-        border-radius: 25px;
-        font-size: 1rem;
-    }
-
-
-    .submit-button {
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 25px;
-        background-color: #4caf50;
-        color: white;
-        cursor: pointer;
-    }
-
-
-    .submit-button:hover {
-        background-color: #45a049;
-    }
-</style> -->
