@@ -83,8 +83,8 @@ export async function GET(params: { url: URL }) {
             const start = Math.max(0, matchIndex - chunk_size);
             const end = Math.min(book.text.length, matchIndex + query.length + Number(chunk_size));
             return {
-                idx: getPageNum(matchIndex),
-                data: book.text.slice(start, end)
+                idx: getPageNum(matchIndex) as number,
+                data: book.text.slice(start, end) as string
             };
         });
         return json(results);

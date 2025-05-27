@@ -37,13 +37,13 @@ export async function GET(params: { url: URL }) {
   });
 
   console.log(qdrant_results);
-  let results: Result[] = [];
+  let results = [];
   let index: number = 0
   for (let i = 0; i < qdrant_results.length; i++) {
     console.log(qdrant_results[i].payload!.pageContent)
     if (qdrant_results[i].payload!.pageContent) {
       results.push({
-        idx: index,
+        idx: index as number,
         data: qdrant_results[i].payload!.pageContent as string
       })
 
